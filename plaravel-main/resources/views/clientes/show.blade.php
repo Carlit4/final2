@@ -14,60 +14,68 @@
     @endif
 </div>
 <div class="container-fluid">
-    <div class="col-12 text-center my-2">
-        <h3 class="fw-bold ">Arriendos Vigentes</h3>
-    </div>
-    @foreach ($cliente->arriendos as $arriendo)
-    @if ($arriendo->fecha_devolucion == null)
-    <div class="col-sm-6 col-lg-3 mt-2 mb-2">
-        <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Vehiculo: {{$arriendo->patente_vehiculo}}</h5>
-              <ul class="list-group list-group-flash">
-                <li class="list-group-item">
-                    <strong>Fecha de inicio: </strong> {{$arriendo->fecha_inicio}}
-                    <img src="{{ Storage::url($arriendo->imagen_entrega)}}" class="card-img-top" alt="">
-                </li>
-                <li class="list-group-item">
-                    <strong>Fecha de termino: </strong> {{$arriendo->fecha_termino}}
-                </li>
-                <li class="list-group-item">
-                    <strong>Fecha de devolucion: <span class="text-danger">Pendiente!</span></strong>
-                </li>
-              </ul>
+
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <h3 class="fw-bold ">Arriendos Vigentes</h3>
+        </div>
+        @foreach ($cliente->arriendos as $arriendo)
+        @if ($arriendo->fecha_devolucion == null)
+        <div class="col-sm-6 col-lg-3 mt-2 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Vehiculo: {{$arriendo->patente_vehiculo}}</h5>
+                    <ul class="list-group list-group-flash">
+                        <li class="list-group-item">
+                            <strong>Fecha de inicio: </strong> {{$arriendo->fecha_inicio}}
+                            <img src="{{ Storage::url($arriendo->imagen_entrega)}}" class="card-img-top" alt="">
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Fecha de termino: </strong> {{$arriendo->fecha_termino}}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Fecha de devolucion: <span class="text-danger">Pendiente!</span></strong>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
+        @endif
+        @endforeach
     </div>
-    @endif
-    @endforeach
+
 </div>
 <div class="container-fluid my-4">
-    <div class="col-12 text-center my-2">
-        <h3 class="fw-bold ">Arriendos Finalizados</h3>
-    </div>
-    @foreach ($cliente->arriendos as $arriendo)
-    @if ($arriendo->fecha_devolucion <> null)
-    <div class="col-sm-6 col-lg-3 mt-2 my-2">
-        <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Vehiculo: {{$arriendo->patente_vehiculo}}</h5>
-              <ul class="list-group list-group-flash">
-                <li class="list-group-item">
-                    <strong>Fecha de inicio: </strong> {{$arriendo->fecha_inicio}}
-                    <img src="{{ Storage::url($arriendo->imagen_entrega)}}" class="card-img-top" alt="">
-                </li>
-                <li class="list-group-item">
-                    <strong>Fecha de termino: </strong> {{$arriendo->fecha_termino}}
-                </li>
-                <li class="list-group-item">
-                    <strong>Fecha de devolucion: </strong> {{$arriendo->fecha_devolucion}}
-                </li>
-              </ul>
-            </div>
+
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <h3 class="fw-bold ">Arriendos Finalizados</h3>
         </div>
+        @foreach ($cliente->arriendos as $arriendo)
+        @if ($arriendo->fecha_devolucion <> null)
+            <div class="col-sm-6 col-lg-3 mt-2 my-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Vehiculo: {{$arriendo->patente_vehiculo}}</h5>
+                        <ul class="list-group list-group-flash">
+                            <li class="list-group-item">
+                                <strong>Fecha de inicio: </strong> {{$arriendo->fecha_inicio}}
+                                <img src="{{ Storage::url($arriendo->imagen_entrega)}}" class="card-img-top" alt="">
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Fecha de termino: </strong> {{$arriendo->fecha_termino}}
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Fecha de devolucion: </strong> {{$arriendo->fecha_devolucion}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            @endif
+            @endforeach
     </div>
-    @endif
-    @endforeach
+
 </div>
 
 <div class="row my-4">
@@ -76,5 +84,3 @@
     </div>
 </div>
 @endsection
-
-

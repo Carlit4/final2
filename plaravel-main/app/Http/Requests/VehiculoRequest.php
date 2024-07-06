@@ -24,7 +24,7 @@ class VehiculoRequest extends FormRequest
         return [
             'patente' => ['required', 'min:6', 'max:8'],
             'marca' => ['required', 'min:3', 'max:15'],
-            'anio' => ['required', 'size:4','integer'],
+            'anio' => ['required', 'integer'],
             'tipo' => ['required'],
             'estado' => ['required']
         ];
@@ -40,10 +40,10 @@ class VehiculoRequest extends FormRequest
             'marca.min' => 'La marca debe tener al menos 3 caracteres!',
             'marca.max' => 'La marca debe tener no mas de 15 caracteres!',
             'anio.required' => 'El año del vehiculo es obligatorio!',
-            'anio.size' => 'El año del vehiculo debe tener 4 digitos!',
+            //'anio.size' => 'El año del vehiculo debe tener 4 digitos!',
             'anio.integer' => 'El año del vehiculo debe ser numerico!',
             'tipo.required' => 'El tipo del vehiculo es obligatorio!',
-            'estado' => 'El estado del vehiculo es obligatorio!'
+            'estado.required' => 'El estado del vehiculo es obligatorio!'
         ];
     }
 }

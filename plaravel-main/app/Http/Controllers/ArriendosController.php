@@ -77,24 +77,31 @@ class ArriendosController extends Controller
 
 
     public function devolustore(Request $request)
-    {
-        $arriendo = Arriendo::where('patente_vehiculo', $request->patente_vehiculo)->latest('fecha_inicio')->first();
-        $fechadevolucion = Carbon::parse($request->fecha_devolucion);
-        $horadevolucion = Carbon::createFromFormat('H:i', $request->hora_devolucion);
+    {   
 
-        if ($fechadevolucion<($arriendo->fecha_inicio)){
-            return back()->withErrors('La fecha de devolucion es incorrecta!!')->onlyInput('fecha_ter');
-        }
-
-
+        $arriendo = Arriendo::where('fecha_devolucion', null)
+               ->where('patente_vehiculo', $request->patente_vehiculo)
+               ->first(); // Utilizamos first() en lugar de get() para obtener un único resultado
 
         if ($arriendo) {
+            // Parsear la fecha y hora de devolución
+            $fechadevolucion = Carbon::parse($request->fecha_devolucion);
+            $horadevolucion = Carbon::createFromFormat('H:i', $request->hora_devolucion);
+
+            if ($fechadevolucion<($arriendo->fecha_inicio)){
+                return back()->withErrors('La fecha de devolucion es incorrecta!!')->onlyInput('fecha_ter');
+            }
+    
             $arriendo->fecha_devolucion = $fechadevolucion;
             $arriendo->hora_devolucion = $horadevolucion;
-            $arriendo->imagen_recepcion = $request->file('img_rec')->store('public/arriendos');
+            $arriendo->imagen_recepcion = $request->file('img_rec')->store('public/arriendos');;
+
+            // Guardar los cambios
             $arriendo->save();
+
+
         } else {
-            return redirect()->route('arriendos.index')->withErrors('Arriendo no encontrado.');
+            dd('No se encontró ningún arriendo para devolver');
         }
 
         $vehiculo = Vehiculo::where('patente', $request->patente_vehiculo)->first();

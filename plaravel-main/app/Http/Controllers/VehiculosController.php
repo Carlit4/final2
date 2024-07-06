@@ -35,7 +35,7 @@ class VehiculosController extends Controller
     }
 
 
-    public function store(VehiculoRequest $request)
+    public function store(Request $request)
     {
         $vehiculo = new Vehiculo();
 
@@ -70,7 +70,7 @@ class VehiculosController extends Controller
     }
 
 
-    public function update(VehiculoRequest $request, Vehiculo $vehiculo)
+    public function update(Request $request, Vehiculo $vehiculo)
     {
         if(Gate::denies('usuarios-gestion')){
             $vehiculo->estado = $request->estado;
